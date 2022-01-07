@@ -66,6 +66,9 @@ function bet(){
 
             classUltimoItem = $('.bets__inner').find('.bets__item').first().attr('class');
 
+            //Marcando item como checado
+            $('.bets__inner').find('.bets__item').first().attr('class', 'checked');
+
             console.log('Class ultimo item: '+classUltimoItem);
 
             let ganhou = classUltimoItem != 'bets__item bets__item_losing';
@@ -94,29 +97,34 @@ function bet(){
                 //Se perdeu, duplica a aposta e aposta no outro lado
                 duplicarAposta();
 
-                if ($('.lado-moeda-atual').text() == 'coroa'){
-                    $('.lado-moeda-atual').text('cara');
-                }else{
-                    $('.lado-moeda-atual').text('coroa');
-                }
+                setTimeout(() => {
 
-                console.log('Proxima aposta será: '+currentBet);
+                    if ($('.lado-moeda-atual').text() == 'coroa'){
+                        $('.lado-moeda-atual').text('cara');
+                    }else{
+                        $('.lado-moeda-atual').text('coroa');
+                    }
+
+                    console.log('Proxima aposta será: '+$('.lado-moeda-atual').text());
+
+                }, 500);
 
             }
 
-            //Marcando item como checado
-            $('.bets__inner').find('.bets__item').first().attr('class', 'checked');
+            //Terminou de processar, começa de novo
+            setTimeout(bet, 100);
 
-        }catch (e) {}
+        }catch (e) {
+            //Se deu erro, começa de novo
+            setTimeout(bet, 100);
+        }
 
     })();
 
-    setTimeout(bet, 2000);
-
 }
 
-$('.tickets__title').text('Máx Erros Seguidos');
-$('.tickets__value').html('<span class="atual">0</span>/<span class="max">0</span> (<span class="lado-moeda-atual">coroa</span>)');
+$('.tickets__title').text('Erros Atual / Máx Erros Seguidos / Aposta Atual');
+$('.tickets__value').html('<span class="atual">0</span> &nbsp; / &nbsp; <span class="max">0</span> &nbsp;&nbsp; (<span class="lado-moeda-atual">coroa</span>)');
 
 apostaMinima();
 bet();
