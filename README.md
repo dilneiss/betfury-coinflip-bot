@@ -9,7 +9,7 @@ Veja aqui quantas chances você terá de acordo com seu saldo atual: https://jsf
 
 # Como usar
 - Habilite o modo rápido no game e também os atalhos de teclado.
-- Abra o console do navegador e importe todas as funções definidas no script flipcoin.js
+- Abra o console do navegador e importe todas as funções definidas no script flipcoin.html
 - Rode os comandos jquery que irá escrever na tela o numero atual de erros em sequências e o número máximo de erros seguintes já chegado.
 - Rode o comando: apostaMinima() ou clique no minimo para apostar o minimo da moeda 
 - Rode o comando para iniciar o bot: bet('coroa');
