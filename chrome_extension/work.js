@@ -55,7 +55,7 @@ function bet(){
     if ($('.inp-number').val() <= '0.20' && parseInt($('.tickets__value').find('.max').text()) < 16){
 
         //Limitando ganhos por sessão
-        if ($('div.bets').find('.font-digits').first().text() >= '0.01'){
+        if ($('div.bets').find('.font-digits').first().text() >= '0.01' && $('div.bets').find('.font-digits').first().attr('style') == 'color: #2ddc4b'){
 
             console.log('Limite de ganho atingido: '+$('div.bets').find('.font-digits').first().text());
 
