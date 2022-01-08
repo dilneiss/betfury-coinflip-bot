@@ -51,78 +51,100 @@ function _waitForElement(selector, delay = 50, tries = 250) {
 
 function bet(){
 
-    console.log('Iniciando apostas');
+    //Limitando aposta em 0.20 e máximo de erros simultâneos em 16
+    if ($('.inp-number').val() <= '0.20' && parseInt($('.tickets__value').find('.max').text()) < 16){
 
-    console.log('Valor da aposta atual: '+$('.inp-number').val());
+        //Limitando ganhos por sessão
+        if ($('div.bets').find('.font-digits').first().text() >= '0.01'){
 
-    if ($('.lado-moeda-atual').text() == 'coroa'){
-        pressCoroa();
-    }else{
-        pressCara();
-    }
+            console.log('Limite de ganho atingido: '+$('div.bets').find('.font-digits').first().text());
 
-    const start = (async () => {
+        }else{
 
-        try {
+            console.log('Iniciando apostas');
 
-            await _waitForElement('.bets__item');
+            console.log('Lucro obtido na sessão: '+$('div.bets').find('.font-digits').first().text());
 
-            classUltimoItem = $('.bets__inner').find('.bets__item').first().attr('class');
+            console.log('Valor da aposta atual: '+$('.inp-number').val());
 
-            //Marcando item como checado
-            $('.bets__inner').find('.bets__item').first().attr('class', 'checked');
-
-            console.log('Class ultimo item: '+classUltimoItem);
-
-            let ganhou = classUltimoItem != 'bets__item bets__item_losing';
-
-            //Se ganhou só volta para aposta minima novamente
-            if (ganhou){
-
-                $('.tickets__value').find('.atual').text('0');
-
-                console.log('ganhou');
-
-                apostaMinima();
-
+            if ($('.lado-moeda-atual').text() == 'coroa'){
+                pressCoroa();
             }else{
-
-                errosSeguidos = parseInt($('.tickets__value').find('.atual').text());
-                maxErrosSeguidos = parseInt($('.tickets__value').find('.max').text());
-                errosSeguidos++;
-                $('.tickets__value').find('.atual').text(errosSeguidos);
-
-                if (errosSeguidos > maxErrosSeguidos){
-                    maxErrosSeguidos = errosSeguidos;
-                    $('.tickets__value').find('.max').text(maxErrosSeguidos)
-                }
-
-                //Se perdeu, duplica a aposta e aposta no outro lado
-                duplicarAposta();
-
-                setTimeout(() => {
-
-                    if ($('.lado-moeda-atual').text() == 'coroa'){
-                        $('.lado-moeda-atual').text('cara');
-                    }else{
-                        $('.lado-moeda-atual').text('coroa');
-                    }
-
-                    console.log('Proxima aposta será: '+$('.lado-moeda-atual').text());
-
-                }, 200);
-
+                pressCara();
             }
 
-            //Terminou de processar, começa de novo
-            setTimeout(bet, 100);
+            const start = (async () => {
 
-        }catch (e) {
-            //Se deu erro, começa de novo
-            setTimeout(bet, 100);
+                try {
+
+                    await _waitForElement('.bets__item');
+
+                    classUltimoItem = $('.bets__inner').find('.bets__item').first().attr('class');
+
+                    //Marcando item como checado
+                    $('.bets__inner').find('.bets__item').first().attr('class', 'checked');
+
+                    console.log('Class ultimo item: '+classUltimoItem);
+
+                    let ganhou = classUltimoItem != 'bets__item bets__item_losing';
+
+                    //Se ganhou só volta para aposta minima novamente
+                    if (ganhou){
+
+                        $('.tickets__value').find('.atual').text('0');
+
+                        console.log('ganhou');
+
+                        apostaMinima();
+
+                    }else{
+
+                        errosSeguidos = parseInt($('.tickets__value').find('.atual').text());
+                        maxErrosSeguidos = parseInt($('.tickets__value').find('.max').text());
+                        errosSeguidos++;
+                        $('.tickets__value').find('.atual').text(errosSeguidos);
+
+                        if (errosSeguidos > maxErrosSeguidos){
+                            maxErrosSeguidos = errosSeguidos;
+                            $('.tickets__value').find('.max').text(maxErrosSeguidos)
+                        }
+
+                        //Se perdeu, duplica a aposta e aposta no outro lado
+                        duplicarAposta();
+
+                        setTimeout(() => {
+
+                            if ($('.lado-moeda-atual').text() == 'coroa'){
+                                $('.lado-moeda-atual').text('cara');
+                            }else{
+                                $('.lado-moeda-atual').text('coroa');
+                            }
+
+                            console.log('Proxima aposta será: '+$('.lado-moeda-atual').text());
+
+                        }, 200);
+
+                    }
+
+                    //Terminou de processar, começa de novo
+                    setTimeout(bet, 100);
+
+                }catch (e) {
+                    //Se deu erro, começa de novo
+                    setTimeout(bet, 100);
+                }
+
+            })();
+
         }
 
-    })();
+
+    }else{
+
+        $('.lado-moeda-atual').text('Parado por atingir limite da aposta ou limite de erros simultâneos');
+
+    }
+
 
 }
 
