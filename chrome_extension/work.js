@@ -57,7 +57,7 @@ function bet(){
         //Limitando ganhos por sessão
         if ($('div.bets').find('.font-digits').first().text() >= '0.01' && $('div.bets').find('.font-digits').first().attr('style') == 'color: #2ddc4b'){
 
-            console.log('Limite de ganho atingido: '+$('div.bets').find('.font-digits').first().text());
+            $('.lado-moeda-atual').text('Limite de ganho atingido: '+$('div.bets').find('.font-digits').first().text());
 
         }else{
 
