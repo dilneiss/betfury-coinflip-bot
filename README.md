@@ -3,17 +3,17 @@
 Esse bot irá seguir a estratégia de Martingale, que consiste em realizar uma aposta, na perda dobra a aposta.
 O bot irá apostar primeiramente na cara, se der coroa ele vai dobrar e apostar na coroa e assim por diante.
 Quando acertar, irá zerar e começar com o minimo da moeda novamente.
-Obs. O jogo pode rodar em background sem problema algum, ou até mesmo mais de uma conta, basta seguir os mesmos passos em cada conta.
 
 Veja aqui quantas chances você terá de acordo com seu saldo atual: https://jsfiddle.net/umdq7c04
 
 # Como usar
-- Habilite o modo rápido no game e também os atalhos de teclado.
-- Abra o console do navegador e importe todas as funções definidas no script flipcoin.html
-- Rode os comandos jquery que irá escrever na tela o numero atual de erros em sequências e o número máximo de erros seguintes já chegado.
-- Rode o comando: apostaMinima() ou clique no minimo para apostar o minimo da moeda 
-- Rode o comando para iniciar o bot: bet('coroa');
+- No navegador google chrome, digite na url do navegador: chrome://extensions/
+- Clique no botão carregar sem compactação
+- Selecione a pasta chrome_extension
+- Abra a aba do jogo, acione modo rápido, atalhos de teclado e gráfico de acompanhamento
 - Aprecie o bot trabalhando pra você :)
+
+Obs. O bot irá criar na tela do jogo atual alguns dados de acompanhamento, como: Quantidade de perdas seguidas, máximo de perda seguidas e aposta atual
 
 # Se gostou e tá ganhando algo com essa ajuda, dá um troco aew :)
 - BTC: 1NGesQJvLr9tuu9Civ2Zrpcjt96qmB7sgw
