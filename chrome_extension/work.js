@@ -18,7 +18,7 @@ function apostaMinima(){
     duplicarAposta();
     duplicarAposta();
     duplicarAposta();
-    duplicarAposta();
+    duplicarAposta(); //128
     console.log('Aposta Minima');
 }
 function _waitForElement(selector, delay = 50, tries = 250) {
@@ -52,6 +52,8 @@ function _waitForElement(selector, delay = 50, tries = 250) {
 function bet(){
 
     console.log('Iniciando apostas');
+
+    console.log('Valor da aposta atual: '+$('.inp-number').val());
 
     if ($('.lado-moeda-atual').text() == 'coroa'){
         pressCoroa();
